@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="AudioPlayer.TrackItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:AudioPlayer"
+             mc:Ignorable="d"
+             ><!-- d:DesignHeight="100" d:DesignWidth="300" -->
+
+    <UserControl.Resources>
+        <Style x:Key="ButtonPlaybackBackground" TargetType="Button">
+            <Setter Property="Ellipse.Fill" Value="#2e333a" />
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Height" Value="50" />
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Opacity" Value="0.8" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TextStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontFamily" Value="Century Gothic" />
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid >
+        <Grid Margin="0, 0" VerticalAlignment="Center">
+            <DockPanel>
+                <StackPanel VerticalAlignment="Center" DockPanel.Dock="Right">
+                    <Label Name="Lenght" Style="{StaticResource TextStyle}" FontSize="20" Content="3:15" />
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" >
+                    <Button Name="Button" Click="playStopTrack" Tag="-1" Style="{StaticResource ButtonPlaybackBackground}" >
+                        <Image Name="ButtonIcon" Source="images/play.png" Width="25" Height="25" />
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid>
+                                    <Ellipse Fill="#2e333a" />
+                                    <Ellipse />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Effect>
+                            <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                        </Button.Effect>
+                    </Button>
+                
+                <StackPanel VerticalAlignment="Center" Orientation="Vertical"  Margin="10, 0, 0, 0">
+                    <Label Name="Title" Style="{StaticResource TextStyle}" FontSize="20" Content="Survivor" />
+                    <Label Name="Author" Style="{StaticResource TextStyle}" FontSize="15" Content="2WEI" />
+                </StackPanel>
+                </StackPanel>
+                
+            </DockPanel>
+        </Grid>
+    </Grid> 
+</UserControl>
