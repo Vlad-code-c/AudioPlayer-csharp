@@ -17,7 +17,7 @@ namespace AudioPlayer
         private const string PATH = @"./../../music/";
         
         
-        public static void downloadAudioFromUrl(string url)
+        public static string downloadAudioFromUrl(string url)
         {
             createDirectoryIfNotExists();
             
@@ -36,6 +36,31 @@ namespace AudioPlayer
             }
                
             File.Delete(PATH + vid.FullName);
+
+            return outputFile.Filename;
+        }
+        
+        public static string downloadAudioFromUrlAwait(string url)
+        {
+            createDirectoryIfNotExists();
+            
+            var youtube = YouTube.Default;
+            var vid = youtube.GetVideo(url);
+            File.WriteAllBytes(PATH + vid.FullName, vid.GetBytes());
+            
+
+            var inputFile = new MediaFile(filename: PATH + vid.FullName);
+            var outputFile = new MediaFile(filename: $"{PATH + vid.FullName.Replace(".mp4", ".mp3")}.mp3");
+            
+            using (var engine = new Engine())
+            {
+                engine.GetMetadata(inputFile);
+                engine.Convert(inputFile, outputFile);
+            }
+               
+            File.Delete(PATH + vid.FullName);
+
+            return outputFile.Filename;
         }
 
         private static void createDirectoryIfNotExists()

@@ -7,9 +7,10 @@
         xmlns:uc="clr-namespace:AudioPlayer"
         xmlns:local="clr-namespace:AudioPlayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="350" WindowStyle="None"
+        Title="MainWindow" Height="600" Width="350"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" MouseDown="Window_MouseDown">
+        ResizeMode="NoResize" MouseDown="Window_MouseDown"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
     <Window.Resources>
         <Style x:Key="ButtonPlaybackBackground" TargetType="Button">
@@ -27,38 +28,52 @@
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontFamily" Value="Century Gothic" />
         </Style>
+
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="Background" Value="#2e333a" />
+            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="BorderBrush" Value="#454545" />
+        </Style>
     </Window.Resources>
-    
-    <materialDesign:Card>
-        <Grid Name="Grid" Background="#2e333a">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                    <Label Content="My Tracks" Style="{StaticResource TextStyle}" FontSize="30" Margin="10, 10, 0, 0"/>
-                    <Button Click="ButtonBase_OnClick" Margin="120, 10, 10, 0" Style="{StaticResource ButtonPlaybackBackground}">
-                        <Image Source="images/add.png" Width="25" Height="25" />
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Ellipse Fill="#2e333a" />
-                                    <Ellipse />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Effect>
-                            <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
-                        </Button.Effect>
-                    </Button>
-                </StackPanel>
-                
-                <ListBox Margin="10, 15, 0, 5" Name="ListBox" Background="#2e333a" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-                    <!-- <ListBoxItem Name="TrackItem" > -->
-                    <!--     ~1~ <uc:TrackItem  /> @1@ -->
-                    <!--     ~1~ <uc:TrackItem Height="Auto" Width="350"/> @1@ -->
-                    <!-- </ListBoxItem> -->
-                </ListBox>
-            </DockPanel>
-        </Grid>
+
+
+    <materialDesign:Card Background="Transparent">
+        <Border Style="{StaticResource BorderStyle}">
+            <Grid Name="Grid">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                        <Label Content="My Tracks" Style="{StaticResource TextStyle}" FontSize="30"
+                               Margin="10, 10, 0, 0" />
+                        <Button Click="ButtonBase_OnClick" Margin="120, 10, 10, 0"
+                                Style="{StaticResource ButtonPlaybackBackground}">
+                            <Image Source="images/add.png" Width="25" Height="25" />
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid>
+                                        <Ellipse Fill="#2e333a" />
+                                        <Ellipse />
+                                        <ContentPresenter Content="{TemplateBinding Content}"
+                                                          HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Button.Effect>
+                                <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                            </Button.Effect>
+                        </Button>
+                    </StackPanel>
+
+                    <ListBox Margin="10, 15, 5, 15" Name="ListBox" Background="#2e333a"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <!-- <ListBoxItem Name="TrackItem" > -->
+                        <!--     ~1~ <uc:TrackItem  /> @1@ -->
+                        <!--     ~1~ <uc:TrackItem Height="Auto" Width="350"/> @1@ -->
+                        <!-- </ListBoxItem> -->
+                    </ListBox>
+                </DockPanel>
+            </Grid>
+        </Border>
     </materialDesign:Card>
 </Window>

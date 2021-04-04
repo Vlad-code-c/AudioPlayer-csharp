@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using AudioPlayer.forms;
 using Microsoft.Win32;
-using TagLib;
+using File = TagLib.File;
 
 namespace AudioPlayer
 {
@@ -11,6 +13,7 @@ namespace AudioPlayer
         public static PlayListList playList;
         public static MainWindow _mainWindow;
         public static int currentTrackIndex = -1;
+        public SongAddFrom saf;
 
         public Playlist(MainWindow mainWindow)
         {
@@ -50,7 +53,7 @@ namespace AudioPlayer
         /// <param name="author"></param>
         /// <param name="lenght"></param>
         /// <param name="path"></param>
-        private void addNewTrackItem(string title, string author, int lenght, string path)
+        public void addNewTrackItem(string title, string author, int lenght, string path)
         {
             TrackItem trackItem = new TrackItem(playList.Count, title, author, lenght, path);
             
@@ -64,12 +67,16 @@ namespace AudioPlayer
         /// <summary>
         /// Read mp3 file and add it to playlist
         /// </summary>
-        private void readFile()
+        public void readFile()
         {
             var filePath = string.Empty;
+            
+            if (saf != null)
+            {
+                saf.Close();
+            }
 
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = "C:\\";
             ofd.Filter = "mp3 files (*.mp3)|*.mp3";
             ofd.FilterIndex = 1;
             ofd.RestoreDirectory = true;
@@ -92,12 +99,13 @@ namespace AudioPlayer
                 addNewTrackItem(ofd.SafeFileNames[i], artist, 0, filePath);            
             }
             
-            
-            
         }
-        
-        // public TrackItem
 
+        public void downloadFromYoutube()
+        {
+            YoutubeDownloader ytd = new YoutubeDownloader(this);
+            ytd.Show();
+        }
         
         
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -108,7 +116,9 @@ namespace AudioPlayer
         
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            readFile();
+            // readFile();
+            saf = new SongAddFrom(this);
+            saf.ShowDialog();
         }
     }
 }

@@ -5,13 +5,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AudioPlayer"
         mc:Ignorable="d"
-        Title="SongAddFrom" Height="150" Width="300" Background="#2e333a">
+        Title="SongAddFrom" Height="150" Width="300"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" MouseDown="Window_MouseDown" WindowStartupLocation="CenterOwner" >
     
     <Window.Resources>
         <Style x:Key="ButtonPlaybackBackground" TargetType="Button">
             <Setter Property="Ellipse.Fill" Value="#2e333a" />
-            <Setter Property="Width" Value="50" />
-            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Height" Value="80" />
             <Style.Triggers>
                 <Trigger Property="Button.IsMouseOver" Value="True">
                     <Setter Property="Button.Opacity" Value="0.8" />
@@ -23,43 +24,52 @@
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontFamily" Value="Century Gothic" />
         </Style>
+        
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="Background" Value="#2e333a" />
+            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="BorderBrush" Value="#454545" />
+        </Style>
     </Window.Resources>
     
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button Style="{StaticResource ButtonPlaybackBackground}">
-            <Image Source="images/youtube.png"
-                   Width="35" Height="35" />
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Ellipse Fill="#2e333a" />
-                        <Ellipse />
-                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                          VerticalAlignment="Center" />
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-            <Button.Effect>
-                <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
-            </Button.Effect>
-        </Button>
-        
-        <Button Style="{StaticResource ButtonPlaybackBackground}">
-            <Image Source="images/folder.png" Width="25" Height="25" />
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Ellipse Fill="#2e333a" />
-                        <Ellipse />
-                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                          VerticalAlignment="Center" />
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-            <Button.Effect>
-                <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
-            </Button.Effect>
-        </Button>
-        
-    </StackPanel>
+    <Border Style="{StaticResource BorderStyle}">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Click="addFromYoutube" Style="{StaticResource ButtonPlaybackBackground}">
+                <Image Source="images/youtube.png"
+                       Width="50" Height="50" />
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="#2e333a" />
+                            <Ellipse />
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Effect>
+                    <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
+                </Button.Effect>
+            </Button>
+            
+            <Button Click="addFromFile" Margin="30, 0, 0, 0" Style="{StaticResource ButtonPlaybackBackground}">
+                <Image Source="images/folder.png" Width="50" Height="50" />
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="#2e333a" />
+                            <Ellipse />
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Effect>
+                    <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
+                </Button.Effect>
+            </Button>
+            
+        </StackPanel>
+    </Border>
 </Window>

@@ -1,0 +1,57 @@
+﻿<Window x:Class="AudioPlayer.forms.YoutubeDownloader"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:AudioPlayer.forms"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="YoutubeDownloader" Height="450" Width="800"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="ButtonPlaybackBackground" TargetType="Button">
+            <Setter Property="Ellipse.Fill" Value="#2e333a" />
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Height" Value="50" />
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Opacity" Value="0.8" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TextStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontFamily" Value="Century Gothic" />
+        </Style>
+
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="Background" Value="#2e333a" />
+            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="BorderBrush" Value="#454545" />
+        </Style>
+    </Window.Resources>
+
+    <materialDesign:Card Background="Transparent">
+        <Border Style="{StaticResource BorderStyle}">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+                <Grid  Width="600" Height="35">
+                    <Border CornerRadius="10" Background="White" BorderBrush="#202020" BorderThickness="1">
+                        <TextBox Text="https://ngjdknhgn" Margin="2" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="20" Name="UrlTextBox" Background="Transparent" BorderBrush="Transparent" />
+                    </Border>
+                </Grid>
+                
+                <Grid Margin="200, 10">
+                    <Border CornerRadius="10" Background="#2e333a" BorderBrush="#202020" BorderThickness="3">
+                        <Button Click="download" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Content="Download"
+                                Foreground="White" FontFamily="Century Gothic" FontSize="25"/>
+                    </Border>
+                </Grid>
+                
+            </StackPanel>
+        </Border>
+    </materialDesign:Card>
+</Window>

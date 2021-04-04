@@ -6,8 +6,9 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:AudioPlayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="350" WindowStyle="None"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown">
+        Title="MainWindow" Height="600" Width="350" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" 
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" >
 
     <Window.Resources>
         <Style x:Key="ButtonPlaybackBackground" TargetType="Button">
@@ -25,154 +26,166 @@
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontFamily" Value="Century Gothic" />
         </Style>
+        
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="Background" Value="#2e333a" />
+            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="BorderBrush" Value="#454545" />
+        </Style>
+        
     </Window.Resources>
 
+    <!-- <Border CornerRadius="25" BorderThickness="0" Background="Black"> -->
+        <materialDesign:Card Background="Transparent">
+            <Border Style="{StaticResource BorderStyle}">
+                
+                <Grid >
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10, 10, 0, 0">
+                            
+                            <Button Style="{StaticResource ButtonPlaybackBackground}" Click="showPlaylist_MouseDown">
+                                <Image Source="images/playlist.png" Width="25" Height="25" />
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse Fill="#2e333a" />
+                                            <Ellipse />
+                                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Effect>
+                                    <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                                </Button.Effect>
+                            </Button>
 
-    <materialDesign:Card>
-        <Grid Background="#2e333a">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10, 10, 0, 0">
-                    
-                    <Button Style="{StaticResource ButtonPlaybackBackground}" Click="showPlaylist_MouseDown">
-                        <Image Source="images/playlist.png" Width="25" Height="25" />
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Ellipse Fill="#2e333a" />
-                                    <Ellipse />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Effect>
-                            <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
-                        </Button.Effect>
-                    </Button>
+                            <Button Margin="170, 0, 10, 0" Style="{StaticResource ButtonPlaybackBackground}">
+                                <Image Source="images/minus.png" Width="25" Height="25" />
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse Fill="#2e333a" />
+                                            <Ellipse />
+                                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Effect>
+                                    <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                                </Button.Effect>
+                            </Button>
 
-                    <Button Margin="170, 0, 10, 0" Style="{StaticResource ButtonPlaybackBackground}">
-                        <Image Source="images/minus.png" Width="25" Height="25" />
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Ellipse Fill="#2e333a" />
-                                    <Ellipse />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Effect>
-                            <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
-                        </Button.Effect>
-                    </Button>
+                            <Button Click="exitApp" Style="{StaticResource ButtonPlaybackBackground}">
+                                <Image Source="images/on_off_button.png" Width="25" Height="25" />
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse Fill="#2e333a" />
+                                            <Ellipse />
+                                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Effect>
+                                    <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
+                                </Button.Effect>
+                            </Button>
+                        </StackPanel>
 
-                    <Button Click="exitApp" Style="{StaticResource ButtonPlaybackBackground}">
-                        <Image Source="images/on_off_button.png" Width="25" Height="25" />
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Ellipse Fill="#2e333a" />
-                                    <Ellipse />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Effect>
-                            <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="0.2" />
-                        </Button.Effect>
-                    </Button>
-                </StackPanel>
+                        <Grid Margin="0, 20, 0, 0" VerticalAlignment="Top">
+                            <Ellipse Width="250" Height="250" Fill="Navy" />
+                            <Ellipse Width="250" Height="250">
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush>
+                                        <!-- <GradientStop Color="#00FF0000" Offset="0"></GradientStop> -->
+                                        <!-- <GradientStop Color="#FFFF0000" Offset="1"></GradientStop> -->
+                                        <GradientStop Color="#2a9d8f" Offset="0" />
+                                        <GradientStop Color="#e9c46a" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
 
-                <Grid Margin="0, 20, 0, 0" VerticalAlignment="Top">
-                    <Ellipse Width="250" Height="250" Fill="Navy" />
-                    <Ellipse Width="250" Height="250">
-                        <Ellipse.Fill>
-                            <LinearGradientBrush>
-                                <!-- <GradientStop Color="#00FF0000" Offset="0"></GradientStop> -->
-                                <!-- <GradientStop Color="#FFFF0000" Offset="1"></GradientStop> -->
-                                <GradientStop Color="#2a9d8f" Offset="0" />
-                                <GradientStop Color="#e9c46a" Offset="1" />
-                            </LinearGradientBrush>
-                        </Ellipse.Fill>
-                    </Ellipse>
+                        <StackPanel>
+                            <Label Name="TitleLabel" HorizontalAlignment="Center" Content="Survivor" Style="{StaticResource TextStyle}"
+                                   FontSize="20" />
+                            <Label Name="AuthorLabel" HorizontalAlignment="Center" Content="2WEI" Style="{StaticResource TextStyle}" FontSize="15"
+                                   Margin="0, -5" />
+                        </StackPanel>
+
+                        <StackPanel Margin="25, 20">
+                            <Slider Name="SliderAudio" ValueChanged="SliderAudio_OnValueChanged" Value="0" Maximum="300" Foreground="White" >
+                                <!-- -->
+                                <!-- <Slider.ToolTip> -->
+                                <!--     <ToolTip Placement="Top" Content="00"></ToolTip> -->
+                                <!-- </Slider.ToolTip> -->
+                            </Slider>
+                            <DockPanel HorizontalAlignment="Center">
+                                <Label Name="StartLabel" Margin="0, 0, 100, 0" Content="00:00" FontSize="15" Style="{StaticResource TextStyle}" />
+                                <Label Name="EndLabel" Margin="100, 0, 0, 0" Content="03:24" FontSize="15" Style="{StaticResource TextStyle}" />
+                            </DockPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, -80">
+                            <Button Click="prevSong" Style="{StaticResource ButtonPlaybackBackground}">
+                                <Image Source="images/playback_left.png" Width="25" Height="25" />
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse Fill="#2e333a" />
+                                            <Ellipse />
+                                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Effect>
+                                    <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
+                                </Button.Effect>
+                            </Button>
+
+                            <Button Click="PlayPause" Style="{StaticResource ButtonPlaybackBackground}" Margin="50, 100">
+                                <Image Name="PlayPauseButtonImage" Source="images/play.png" Width="25" Height="25" />
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse Fill="#2e333a" />
+                                            <Ellipse />
+                                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Effect>
+                                    <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
+                                </Button.Effect>
+                            </Button>
+
+                            <Button Click="nextSong" Style="{StaticResource ButtonPlaybackBackground}">
+                                <Image Source="images/playback_right.png" Width="25" Height="25" />
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Ellipse Fill="#2e333a" />
+                                            <Ellipse />
+                                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Effect>
+                                    <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
+                                </Button.Effect>
+                            </Button>
+
+                        </StackPanel>
+                    </StackPanel>
                 </Grid>
-
-                <StackPanel>
-                    <Label Name="TitleLabel" HorizontalAlignment="Center" Content="Survivor" Style="{StaticResource TextStyle}"
-                           FontSize="20" />
-                    <Label Name="AuthorLabel" HorizontalAlignment="Center" Content="2WEI" Style="{StaticResource TextStyle}" FontSize="15"
-                           Margin="0, -5" />
-                </StackPanel>
-
-                <StackPanel Margin="25, 20">
-                    <Slider Name="SliderAudio" ValueChanged="SliderAudio_OnValueChanged" Value="0" Maximum="300" Foreground="White" >
-                        <!-- -->
-                        <!-- <Slider.ToolTip> -->
-                        <!--     <ToolTip Placement="Top" Content="00"></ToolTip> -->
-                        <!-- </Slider.ToolTip> -->
-                    </Slider>
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label Name="StartLabel" Margin="0, 0, 100, 0" Content="00:00" FontSize="15" Style="{StaticResource TextStyle}" />
-                        <Label Name="EndLabel" Margin="100, 0, 0, 0" Content="03:24" FontSize="15" Style="{StaticResource TextStyle}" />
-                    </DockPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, -80">
-                    <Button Click="prevSong" Style="{StaticResource ButtonPlaybackBackground}">
-                        <Image Source="images/playback_left.png" Width="25" Height="25" />
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Ellipse Fill="#2e333a" />
-                                    <Ellipse />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Effect>
-                            <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
-                        </Button.Effect>
-                    </Button>
-
-                    <Button Click="PlayPause" Style="{StaticResource ButtonPlaybackBackground}" Margin="50, 100">
-                        <Image Name="PlayPauseButtonImage" Source="images/play.png" Width="25" Height="25" />
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Ellipse Fill="#2e333a" />
-                                    <Ellipse />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Effect>
-                            <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
-                        </Button.Effect>
-                    </Button>
-
-                    <Button Click="nextSong" Style="{StaticResource ButtonPlaybackBackground}">
-                        <Image Source="images/playback_right.png" Width="25" Height="25" />
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Ellipse Fill="#2e333a" />
-                                    <Ellipse />
-                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Effect>
-                            <DropShadowEffect Color="White" Direction="120" ShadowDepth="1" Opacity="1" />
-                        </Button.Effect>
-                    </Button>
-
-                </StackPanel>
-            </StackPanel>
-        </Grid>
-    </materialDesign:Card>
+            </Border>
+        </materialDesign:Card>
+    <!-- </Border> -->
 </Window>
