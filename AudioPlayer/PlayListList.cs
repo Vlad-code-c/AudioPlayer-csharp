@@ -11,6 +11,7 @@ namespace AudioPlayer
     public class PlayListList : List<TrackItem>
     {
         private const string PATH = "../../playlist.db";
+
         public PlayListList()
         {
             readFromDatabase();
@@ -23,17 +24,14 @@ namespace AudioPlayer
         }
 
 
-        
-        
-        
-
-
         #region Database
+
         private void readFromDatabase()
         {
             SQLiteConnection connection = getConnection();
             // SQLiteCommand command = _connection.CreateCommand();
-            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT \"index\", title, author, length, PATH FROM Tracks", connection);
+            SQLiteDataAdapter dataAdapter =
+                new SQLiteDataAdapter("SELECT \"index\", title, author, length, PATH FROM Tracks", connection);
             DataSet dataSet = new DataSet();
             dataAdapter.Fill(dataSet);
 
@@ -43,23 +41,24 @@ namespace AudioPlayer
                 string title = row.ItemArray[1].ToString();
                 string author = row.ItemArray[2].ToString();
                 int lenght = int.Parse(row.ItemArray[3].ToString());
-                string path =row.ItemArray[4].ToString();
+                string path = row.ItemArray[4].ToString();
 
                 TrackItem trackItem = new TrackItem(index, title, author, lenght, path);
-                
+
                 base.Add(trackItem);
             }
         }
 
-        private void addToDatabase(TrackItem item)
+        public void addToDatabase(TrackItem item)
         {
             SQLiteConnection connection = getConnection();
-            
+
 
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = $"INSERT INTO Tracks (\"index\", title, author, length, PATH) VALUES ({item.index}, '{item.title}', '{item.author}', {item.length}, '{item.path}');";
+            command.CommandText =
+                $"INSERT INTO Tracks (\"index\", title, author, length, PATH) VALUES ({item.index}, '{item.title}', '{item.author}', {item.length}, '{item.path}');";
             command.ExecuteNonQuery();
-            
+
             connection.Close();
         }
 
@@ -77,6 +76,7 @@ namespace AudioPlayer
             sqLiteConnection.Open();
             return sqLiteConnection;
         }
+
         #endregion
     }
 }

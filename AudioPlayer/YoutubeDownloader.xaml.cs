@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using VkNet.Utils;
@@ -18,6 +19,8 @@ namespace AudioPlayer.forms
             this.playlist = playlist;
         }
 
+        
+            
         private void download(object sender, RoutedEventArgs e)
         {
             string text = UrlTextBox.Text;
@@ -25,13 +28,20 @@ namespace AudioPlayer.forms
             {
                 try
                 {
-                    new Thread(() =>
+                    var thread = new Thread(() =>
                     {
+                        Thread.CurrentThread.IsBackground = true;
+
                         string fileName = YoutubeAudio.downloadAudioFromUrlAwait(text);
                         MessageBox.Show("Track downloaded at " + fileName);
-                        // playlist.addNewTrackItem(fileName.Split('/')[fileName.Split('/').Length - 1].Replace(".mp3", ""), "Unknown", 0, fileName);
-                    }).Start();
-                    MessageBox.Show("File will be downloaded soon and added to playlist soon.");
+                        
+                        // playlist.addTrackItem(fileName);
+                    });
+                    thread.SetApartmentState(ApartmentState.STA);
+                    thread.Start();
+            
+            
+                    MessageBox.Show("File will be downloaded soon");
                 }
                 catch (Exception exception)
                 {
@@ -41,7 +51,7 @@ namespace AudioPlayer.forms
                 
                 playlist.saf.Close();
             }
-
+            
             this.Close();
         }
         

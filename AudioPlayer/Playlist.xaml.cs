@@ -1,9 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using AudioPlayer.forms;
 using Microsoft.Win32;
+using TagLib.Riff;
 using File = TagLib.File;
 
 namespace AudioPlayer
@@ -46,6 +50,31 @@ namespace AudioPlayer
             }
         }
         
+        public void addTrackItem(string fileName)
+        {
+            // trackItem.Width = Grid.Width;
+            // playList.Add(trackItem);
+            // ListBox.Items.Add(trackItem);
+            
+            
+            TrackItem trackItem = new TrackItem(
+                Playlist.playList.Count,
+                fileName.Split('/')[fileName.Split('/').Length - 1].Replace(".mp3", ""),
+                "Unknown",
+                0,
+                fileName
+            );
+            
+            playList.Add(trackItem);
+            //
+            // Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart) delegate
+            // {
+            //     ListBox.Items.Add(trackItem);
+            // });
+
+            
+        }
+
         /// <summary>
         ///     Add a new UserControl->TrackItem to playlist list
         /// </summary>
@@ -61,7 +90,6 @@ namespace AudioPlayer
             
             playList.Add(trackItem);
             ListBox.Items.Add(trackItem);
-            
         }
 
         /// <summary>

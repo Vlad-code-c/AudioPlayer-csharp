@@ -27,7 +27,7 @@ namespace AudioPlayer
             
 
             var inputFile = new MediaFile(filename: PATH + vid.FullName);
-            var outputFile = new MediaFile(filename: $"{PATH + vid.FullName.Replace(".mp4", ".mp3")}.mp3");
+            var outputFile = new MediaFile(filename: $"{PATH + vid.FullName.Replace(".mp4", ".mp3")}");
             
             using (var engine = new Engine())
             {
